@@ -37,17 +37,17 @@ const router = useRouter();
 let videoInfo = reactive({video: videos.find((v) => v.id === currentRoute.params.id)});
 const stopVideo = () => {
     playerRef.value.player.stopVideo();
-    router.push('/videos');
+    router.push({name : 'videos'});
 }
 const playNext = () => {
     const index = videos.findIndex(v => v.id === videoInfo.video.id);
     const nextVideo = videos[index + 1];
     if(nextVideo){
         videoInfo.video = nextVideo;
-        router.push('/videos/' + nextVideo.id);
+        router.push({name:'videos/id', params : {id  : nextVideo.id}});
     }else{
         videoInfo.video = videos[0];
-        router.push('/videos/' + videos[0].id);
+        router.push({name : 'videos/id', params  : {id : videos[0].id}});
     }
 }
 const playPrev = () => {
@@ -55,7 +55,7 @@ const playPrev = () => {
     const prevVideo = videos[index -1];
     if(prevVideo){
         videoInfo.video = prevVideo;
-        router.push('/videos/' + prevVideo.id);
+        router.push({name: 'videos/id', params : {id : prevVideo.id}});
     }
 }
 </script>

@@ -4,7 +4,7 @@
         <ul class="list-group">
             <li v-for="v in videos" :key="v.id" class="list-group-item text-left"
                 :class="playingVideo(v.id)">
-                <router-link :to="'/videos/' + v.id">
+                <router-link :to="{name : 'videos/id', params : {id : v.id}}">
                     {{ v.title }}({{ v.category }})
                     <span class="float-end badge bg-secondary">듣기</span>
                 </router-link>

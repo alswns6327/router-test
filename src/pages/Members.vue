@@ -5,7 +5,7 @@
             <div class="row">
                 <div v-for="member in members" :key="member.id"
                     class="col-6 col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                    <router-link :to="'/members/' + member.id">
+                    <router-link :to="{name : 'memberInfo', params :{id : member.id}}">
                         <img class="img-thumbnail"
                             style="width: 90px; height: 110;" :src="member.photo" :title="member.name"/><br/>
                         <h6 class="display-7">{{ member.name }}</h6>
