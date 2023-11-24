@@ -11,14 +11,19 @@
     </div>
 </template>
 
-<script setup>
-import { onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+<script >
 import members from '@/members.json';
-
-    const currentRoute = useRoute();
-    const id = parseInt(currentRoute.params.id, 10);
-    const member = members.find(m => m.id === id);
+export default{
+    name : "MemberInfo",
+    props : ['id'],
+    setup(props){
+        // console.log(props.id);
+        // const id = parseInt(currentRoute.params.id, 10);
+        const member = members.find(m => m.id === parseInt(props.id, 10));
+        return {member}
+    }
+    
+}
 </script>
 
 <style scoped>

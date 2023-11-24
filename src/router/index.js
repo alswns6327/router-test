@@ -6,13 +6,13 @@ import Members from '../pages/Members.vue';
 import MemberInfo from '../pages/MemberInfo.vue';
 import Videos from '../pages/Videos.vue';
 import ViedoPlayer from '../pages/VideoPlayer.vue';
+import NotFound from '../pages/NotFound.vue';
 
 const memberInfoGuard = (to, from)=>{
     if(from.name !== 'members' && from.name !== "members/id"){
         return false;
     }
 }
-const hashHistory = createWebHashHistory();
 const htmlHistory = createWebHistory();
 const router = createRouter({
     history : htmlHistory,
@@ -22,7 +22,7 @@ const router = createRouter({
         {path: '/members', name:'members' , component: Members},
         {
             path: '/members/:id(\\d+)+', name:'memberInfo' , component: MemberInfo,
-            beforeEnter : memberInfoGuard
+            beforeEnter : memberInfoGuard, props:true
         },
         {
             path: '/videos', name:'videos' , component: Videos,
@@ -30,6 +30,7 @@ const router = createRouter({
                 {path: ':id', name:'videos/id', component: ViedoPlayer}
             ]
         },
+        {path: '/:paths(.*)*', name:'NotFound', component: NotFound}
     ]
 });
 
