@@ -25,7 +25,7 @@
 
 <script setup>
 import { inject, reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 import {YoutubeVue3} from 'youtube-vue3';
 
 const videos = inject('videos');
@@ -34,30 +34,40 @@ const playerRef = ref(null);
 const currentRoute = useRoute();
 const router = useRouter();
 
-let videoInfo = reactive({video: videos.find((v) => v.id === currentRoute.params.id)});
+let videoInfo, currentIndex, prevVideo, nextVideo;
+
+videoInfo = reactive({video: videos.find((v) => v.id === currentRoute.params.id)});
+
+const getNavId = (to, t) => {
+    console.log(t);
+    videoInfo.video = videos.find((v) => v.id === to.params.id);
+    currentIndex = videos.findIndex(v => v.id === videoInfo.video.id);
+    prevVideo = videos[currentIndex -1] ? videos[currentIndex - 1] : null;
+    nextVideo = videos[currentIndex +1] ? videos[currentIndex + 1] : null;
+}
+getNavId(currentRoute, 'a');
+
 const stopVideo = () => {
     playerRef.value.player.stopVideo();
     router.push({name : 'videos'});
 }
 const playNext = () => {
-    const index = videos.findIndex(v => v.id === videoInfo.video.id);
-    const nextVideo = videos[index + 1];
     if(nextVideo){
-        videoInfo.video = nextVideo;
         router.push({name:'videos/id', params : {id  : nextVideo.id}});
     }else{
-        videoInfo.video = videos[0];
         router.push({name : 'videos/id', params  : {id : videos[0].id}});
     }
 }
 const playPrev = () => {
-    const index = videos.findIndex(v => v.id === videoInfo.video.id);
-    const prevVideo = videos[index -1];
     if(prevVideo){
-        videoInfo.video = prevVideo;
         router.push({name: 'videos/id', params : {id : prevVideo.id}});
     }
 }
+
+onBeforeRouteUpdate(to => {
+    getNavId(to, 'b');
+})
+
 </script>
 
 <style scoped>

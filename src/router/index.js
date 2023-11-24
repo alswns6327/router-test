@@ -7,8 +7,8 @@ import MemberInfo from '../pages/MemberInfo.vue';
 import Videos from '../pages/Videos.vue';
 import ViedoPlayer from '../pages/VideoPlayer.vue';
 
-const memberInfo = (to, from)=>{
-    if(to.from !== 'members' && to.from !== "members/id"){
+const memberInfoGuard = (to, from)=>{
+    if(from.name !== 'members' && from.name !== "members/id"){
         return false;
     }
 }
@@ -19,7 +19,10 @@ const router = createRouter({
         {path: '/' , name:'home', component: Home},
         {path: '/about', name:'about' , component: About},
         {path: '/members', name:'members' , component: Members},
-        {path: '/members/:id(\\d+)+', name:'memberInfo' , component: MemberInfo},
+        {
+            path: '/members/:id(\\d+)+', name:'memberInfo' , component: MemberInfo,
+            beforeEnter : memberInfoGuard
+        },
         {
             path: '/videos', name:'videos' , component: Videos,
             children: [
@@ -37,6 +40,7 @@ router.beforeEach((to, from) =>{
 });
 
 router.afterEach((to, from, failure) => {
+    console.log(from);
     if(isNavigationFailure(failure)){
         console.log("@@내비게이션 중단 : ", failure);
     }
