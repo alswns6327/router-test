@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, isNavigationFailure } from 'vue-router';
+import { createRouter, createWebHashHistory, createWebHistory, isNavigationFailure } from 'vue-router';
 
 import Home from '../pages/Home.vue';
 import About from '../pages/About.vue';
@@ -12,9 +12,10 @@ const memberInfoGuard = (to, from)=>{
         return false;
     }
 }
-
+const hashHistory = createWebHashHistory();
+const htmlHistory = createWebHistory();
 const router = createRouter({
-    history : createWebHistory(),
+    history : htmlHistory,
     routes : [
         {path: '/' , name:'home', component: Home},
         {path: '/about', name:'about' , component: About},
