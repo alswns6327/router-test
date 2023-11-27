@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, createWebHistory, isNavigationFailure } from 'vue-router';
 
-import Home from '../pages/Home.vue';
-import About from '../pages/About.vue';
-import Members from '../pages/Members.vue';
-import MemberInfo from '../pages/MemberInfo.vue';
-import Videos from '../pages/Videos.vue';
-import ViedoPlayer from '../pages/VideoPlayer.vue';
-import NotFound from '../pages/NotFound.vue';
+const  Home = () => import('../pages/Home.vue');
+const  About = () => import('../pages/About.vue');
+const  Members = () => import('../pages/Members.vue');
+const  MemberInfo = () => import('../pages/MemberInfo.vue');
+const  Videos = () => import('../pages/Videos.vue');
+const  ViedoPlayer = () => import('../pages/VideoPlayer.vue');
+const  NotFound = () => import('../pages/NotFound.vue');
 
 const memberInfoGuard = (to, from)=>{
     if(from.name !== 'members' && from.name !== "members/id"){
