@@ -1,13 +1,21 @@
 <template>
   <div class="container">
     <Header/>
-    <router-view></router-view>
+    <router-view v-slot="{Component}">
+      <Suspense timeout="0">
+        <Component :is="Component"></Component>
+        <template #fallback>
+          <Loading/>
+        </template>
+      </Suspense>
+    </router-view>
   </div>
 </template>
 
 <script setup>
 import Header from '@/components/Header.vue';
 import { provide } from 'vue';
+import Loading from './components/Loading.vue';
 
 provide('videos', [
     { "id":"t0BHhqw_Ecc", "title":"범 내려온다", "category":"official" },
