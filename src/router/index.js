@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory, createWebHistory, isNavigationFailure } from 'vue-router';
 
-const  Home = () => import('../pages/Home.vue');
-const  About = () => import('../pages/About.vue');
-const  Members = () => import('../pages/Members.vue');
-const  MemberInfo = () => import('../pages/MemberInfo.vue');
-const  Videos = () => import('../pages/Videos.vue');
-const  ViedoPlayer = () => import('../pages/VideoPlayer.vue');
-const  NotFound = () => import('../pages/NotFound.vue');
+const  Home = () => import(/* webpackChunkName : "home" */ '../pages/Home.vue');
+const  About = () => import(/* webpackChunkName : "home" */ '../pages/About.vue');
+const  Members = () => import(/* webpackChunkName : "members" */ '../pages/Members.vue');
+const  MemberInfo = () => import(/* webpackChunkName : "members" */ '../pages/MemberInfo.vue');
+const  Videos = () => import(/* webpackChunkName : "videos" */ '../pages/Videos.vue');
+const  ViedoPlayer = () => import(/* webpackChunkName : "videos" */ '../pages/VideoPlayer.vue');
+const  NotFound = () => import(/* webpackChunkName : "home" */ '../pages/NotFound.vue');
 
 const memberInfoGuard = (to, from)=>{
     if(from.name !== 'members' && from.name !== "members/id"){

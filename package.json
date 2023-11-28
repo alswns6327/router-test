@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",
-    "vite": "^4.4.11"
+    "vite": "^4.4.11",
+    "vite-plugin-webpackchunkname": "^0.2.4"
   }
 }
